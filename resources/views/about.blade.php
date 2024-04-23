@@ -26,7 +26,7 @@
         </ul>
     </nav>
     <h1>Welcome from about page
-        <?= $name; ?>
+        {{ $name}}
     </h1>
 </body>
 

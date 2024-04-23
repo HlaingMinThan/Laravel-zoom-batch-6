@@ -28,16 +28,19 @@
 
     <h1>My Blogs</h1>
 
-    <?php foreach($blogs as $blog) { ?>
+    @foreach($blogs as $blog)
     <h1>
-        <a href="/blogs/1">
-            <?= $blog['title'] ?>
+        <a href="/blogs/{{$blog->id}}">
+            {{$blog->title}}
+            @if($blog->title === 'title 1')
+            <span>special blog</span>
+            @endif
         </a>
     </h1>
     <p>
-        <?= $blog['body'] ?>
+        {{$blog->body}}
     </p>
-    <?php } ?>
+    @endforeach
 
 </body>
 

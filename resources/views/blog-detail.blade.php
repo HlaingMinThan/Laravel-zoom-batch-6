@@ -25,8 +25,12 @@
             <li><a href="/about">about</a></li>
         </ul>
     </nav>
-    <h1>Blog title</h1>
-    <p>blog body</p>
+    <h1>
+        {{$blog->title}}
+    </h1>
+    <p>
+        {{$blog->body}}
+    </p>
 </body>
 
 </html>
