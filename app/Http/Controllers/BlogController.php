@@ -15,12 +15,8 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show(Blog $blog) //Blog::find(2)
     {
-        if (!is_numeric($id)) {
-            abort(404);
-        }
-        $blog = Blog::findOrFail($id);
         return view('blog-detail', [
             'blog' => $blog
         ]);

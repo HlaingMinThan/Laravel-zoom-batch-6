@@ -30,7 +30,7 @@
 
     @foreach($blogs as $blog)
     <h1>
-        <a href="/blogs/{{$blog->id}}">
+        <a href="/blogs/{{$blog->slug}}">
             {{$blog->title}}
             @if($blog->title === 'title 1')
             <span>special blog</span>
