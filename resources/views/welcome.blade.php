@@ -16,6 +16,10 @@
         rel="stylesheet"
         href="/style.css"
     >
+    <link
+        href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+        rel="stylesheet"
+    >
 </head>
 
 <body>
@@ -40,7 +44,11 @@
     <p>
         {{$blog->body}}
     </p>
+    <p>category - {{$blog->category->name}}</p>
+    <p>Author - {{$blog->user->name}}</p>
     @endforeach
+    {{-- design --}}
+    {{$blogs->links()}}
 
 </body>
 
