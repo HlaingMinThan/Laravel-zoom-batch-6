@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
+use App\Models\User;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        //conditional query
-        $blogs = Blog::latest();
-        if (request('query')) {
-            $blogs = $blogs->where('title', 'LIKE', '%' . request('query') . '%');
-        }
         return view('blogs.index', [
-            'blogs' => $blogs->paginate(5)
+            'blogs' => Blog::latest()
+                ->filter(request(['query', 'category_id', 'user_id']))
+                ->paginate(5),
+            'users' => User::all(),
+            'categories' => Category::all()
         ]);
     }
 

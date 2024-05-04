@@ -16,6 +16,28 @@ class Blog extends Model
         return $this->belongsTo(Category::class);
     }
 
+    //filter ->scopeFilter
+    //query scope
+    public static function scopeFilter($query, $filters)
+    {
+
+        if (isset($filters['query']) and $filters['query']) {
+            $query->where('title', 'LIKE', '%' . $filters['query'] . '%');
+        }
+
+        if (isset($filters['category_id']) and $filters['category_id']) {
+            $query->whereHas('category', function ($query) use ($filters) {
+                $query->where('id', $filters['category_id']);
+            });
+        }
+
+        if (isset($filters['user_id']) and $filters['user_id']) {
+            $query->whereHas('user', function ($query) use ($filters) {
+                $query->where('id', $filters['user_id']);
+            });
+        }
+    }
+
     // a blog belongsto a user 
     public function user()
     {
