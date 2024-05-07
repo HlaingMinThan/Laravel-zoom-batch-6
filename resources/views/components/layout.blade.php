@@ -53,6 +53,28 @@
                                     href="/about"
                                     :active="request()->is('about')"
                                 >About</x-nav-link>
+                                @auth
+                                <x-nav-link
+                                    href="/register"
+                                    :active="request()->is('register')"
+                                >{{auth()->user()->name}}</x-nav-link>
+                                <form
+                                    action="/logout"
+                                    method="POST"
+                                >
+                                    @csrf
+                                    <button
+                                        type="submit"
+                                        class="bg-red-500 text-white px-3 py-2 rounded-xl"
+                                    >Logout</button>
+                                </form>
+                                @else
+                                <x-nav-link
+                                    href="/register"
+                                    :active="request()->is('register')"
+                                >Register</x-nav-link>
+                                @endauth
+
                             </div>
                         </div>
                     </div>

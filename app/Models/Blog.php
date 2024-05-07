@@ -10,7 +10,7 @@ class Blog extends Model
     use HasFactory;
     protected $fillable = ['title', 'slug', 'body'];
 
-    // A Blog belongs to a category 
+    // A Blog belongs to a category
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -22,7 +22,11 @@ class Blog extends Model
     {
 
         if (isset($filters['query']) and $filters['query']) {
-            $query->where('title', 'LIKE', '%' . $filters['query'] . '%');
+            $query
+                ->where(function ($query)  use ($filters) {
+                    $query->where('title', 'LIKE', '%' . $filters['query'] . '%')
+                        ->orWhere('body', 'LIKE', '%' . $filters['query'] . '%');
+                });
         }
 
         if (isset($filters['category_id']) and $filters['category_id']) {
@@ -38,7 +42,7 @@ class Blog extends Model
         }
     }
 
-    // a blog belongsto a user 
+    // a blog belongsto a user
     public function user()
     {
         return $this->belongsTo(User::class);
