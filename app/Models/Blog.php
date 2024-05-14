@@ -42,6 +42,12 @@ class Blog extends Model
         }
     }
 
+    // a blog hasmany comments
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     // a blog belongsto a user
     public function user()
     {
