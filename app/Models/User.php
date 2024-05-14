@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,6 +23,15 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $appends = [
+        'fullName'
+    ];
+
+    public function getFullNameAttribute()
+    {
+        return $this->name . ' ' . $this->username;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -40,7 +50,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            'created_at' => 'datetime:Y-m-d',
             'password' => 'hashed',
         ];
     }
@@ -49,5 +59,10 @@ class User extends Authenticatable
     public function blogs()
     {
         return $this->hasMany(Blog::class);
+    }
+
+    public function setUsernameAttribute($value)
+    {
+        $this->attributes['username'] = fake()->userName();
     }
 }

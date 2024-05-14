@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,10 +14,13 @@ Route::get('/register', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store']);
 Route::post('/logout', [LogoutController::class, 'destroy']);
 
+
+Route::get('/{user:username}', [ProfileController::class, 'show']);//
+
 //action - method    view
 //all      index     {resource}.index
 //single   show     {resource}.show
-//create   create   {resource}.create 
-//create   store   {resource}.store 
+//create   create   {resource}.create
+//create   store   {resource}.store
 //edit      edit    {resource}.edit
 //destroy   destroy  {resource}.destroy
