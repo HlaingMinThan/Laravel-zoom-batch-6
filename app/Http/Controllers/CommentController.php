@@ -17,6 +17,8 @@ class CommentController extends Controller
             'user_id' => auth()->id(),
             'body' =>  request('body')
         ]);
+
+        // send email -> $blogs's subscribers
         return back();
     }
 }

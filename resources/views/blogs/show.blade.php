@@ -8,13 +8,35 @@
 
     {{-- comments --}}
     <div>
+
+
+        {{-- comment input --}}
+        <h1 class="text-3xl font-bold my-3">
+            Comments
+            {{-- d blog ko subscribe m loke htar yin --}}
+            <form
+                action="/blogs/{{$blog->slug}}/handle-subscription"
+                method="POST"
+            >
+                @csrf
+                @if (!auth()->user()->isSubscribed($blog))
+                <button
+                    type="submit"
+                    class="bg-yellow-500 px-2 py-1 text-sm text-white rounded-md"
+                >Subscribe</button>
+                @else
+                <button
+                    type="submit"
+                    class="bg-red-500 px-2 py-1 text-sm text-white rounded-md"
+                >Unsubscribe</button>
+                @endif
+            </form>
+        </h1>
         <form
             action="/blogs/{{$blog->slug}}/comments"
             method="POST"
         >
             @csrf
-            {{-- comment input --}}
-            <h1 class="text-3xl font-bold my-3">Comments</h1>
             <textarea
                 class="shadow-md border border-2 p-3 w-full my-3"
                 id=""

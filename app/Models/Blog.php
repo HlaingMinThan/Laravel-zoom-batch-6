@@ -23,7 +23,7 @@ class Blog extends Model
 
         if (isset($filters['query']) and $filters['query']) {
             $query
-                ->where(function ($query)  use ($filters) {
+                ->where(function ($query) use ($filters) {
                     $query->where('title', 'LIKE', '%' . $filters['query'] . '%')
                         ->orWhere('body', 'LIKE', '%' . $filters['query'] . '%');
                 });
@@ -46,6 +46,12 @@ class Blog extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    // a blog belongstomany users
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 
     // a blog belongsto a user
