@@ -12,7 +12,6 @@ use App\Http\Middleware\MustBeAuthUser;
 use App\Http\Middleware\MustBeGuestUser;
 use Illuminate\Support\Facades\Route;
 
-
 Route::middleware(MustBeAuthUser::class)->group(function () {
     Route::get('/', [BlogController::class, 'index']);
     Route::get('/about', [AboutController::class, 'index']);
