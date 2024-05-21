@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
@@ -8,10 +9,16 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubscriberController;
+use App\Http\Middleware\MustBeAdmin;
 use App\Http\Middleware\MustBeAuthUser;
 use App\Http\Middleware\MustBeGuestUser;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware(MustBeAdmin::class)->group(function () {
+    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admin/blogs/create', [AdminController::class, 'create']);
+    Route::get('/admin/blogs/{blog}/delete', [AdminController::class, 'destroy']);
+});
 Route::middleware(MustBeAuthUser::class)->group(function () {
     Route::get('/', [BlogController::class, 'index']);
     Route::get('/about', [AboutController::class, 'index']);
