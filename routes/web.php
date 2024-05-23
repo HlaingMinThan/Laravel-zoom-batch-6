@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(MustBeAdmin::class)->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);
     Route::get('/admin/blogs/create', [AdminController::class, 'create']);
+    Route::post('/admin/blogs/store', [AdminController::class, 'store']);
     Route::get('/admin/blogs/{blog}/delete', [AdminController::class, 'destroy']);
+    Route::get('/admin/blogs/{blog}/edit', [AdminController::class, 'edit']);
+    Route::post('/admin/blogs/{blog}/update', [AdminController::class, 'update']);
 });
 Route::middleware(MustBeAuthUser::class)->group(function () {
     Route::get('/', [BlogController::class, 'index']);

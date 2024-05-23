@@ -49,6 +49,10 @@
     <div class="grid grid-cols-3 space-x-2">
         @forelse($blogs as $blog)
         <div class="shadow-md border-2 border-gray-100 p-3">
+            <img
+                src="/storage{{$blog->photo}}"
+                alt=""
+            >
             <h1 class="text-2xl font-bold mb-3">
                 <a href="/blogs/{{$blog->slug}}">
                     {{$blog->title}}

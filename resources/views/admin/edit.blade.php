@@ -1,8 +1,8 @@
 <x-admin-layout>
-    <h1 class="font-bold my-3 text-3xl">Blogs Create</h1>
+    <h1 class="font-bold my-3 text-3xl">Blogs Edit</h1>
     <form
         enctype="multipart/form-data"
-        action="/admin/blogs/store"
+        action="/admin/blogs/{{$blog->id}}/update"
         method="POST"
     >
         @csrf
@@ -11,6 +11,12 @@
                 for="photo"
                 class="block text-sm font-medium leading-6 text-gray-900"
             >Blog Photo</label>
+            <img
+                width="200"
+                height="200"
+                src="/storage{{$blog->photo}}"
+                alt=""
+            >
             <div class="relative mt-2 rounded-md shadow-sm">
                 <input
                     value="{{old('photo')}}"
@@ -31,7 +37,7 @@
             >Blog title</label>
             <div class="relative mt-2 rounded-md shadow-sm">
                 <input
-                    value="{{old('title')}}"
+                    value="{{old('title',$blog->title)}}"
                     type="text"
                     name="title"
                     id="title"
@@ -49,7 +55,7 @@
             >Blog slug</label>
             <div class="relative mt-2 rounded-md shadow-sm">
                 <input
-                    value="{{old('slug')}}"
+                    value="{{old('slug',$blog->title)}}"
                     type="text"
                     name="slug"
                     id="slug"
@@ -72,7 +78,7 @@
                     id=""
                     cols="30"
                     rows="10"
-                >{{old('body')}}</textarea>
+                >{{old('body',$blog->body)}}</textarea>
             </div>
             @error('body')
             <p class="text-xs text-red-500 my-2">{{$message}}</p>
@@ -85,7 +91,7 @@
                 id=""
             >
                 @foreach ($categories as $category)
-                <option {{$category->id == old('category_id') ? 'selected' : '' }}
+                <option {{$category->id == old('category_id',$blog->category_id) ? 'selected' : '' }}
                     value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
             </select>
@@ -98,7 +104,7 @@
                 type="submit"
                 class="bg-indigo-500 px-2 py-1 w-full rounded-lg text-white"
             >
-                Create</button>
+                Update</button>
         </div>
     </form>
 

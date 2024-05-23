@@ -32,7 +32,7 @@
                     <span
                         class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Actions</span>
                     <a
-                        href="#"
+                        href="/admin/blogs/{{$blog->id}}/edit"
                         class="text-blue-400 hover:text-blue-600 underline"
                     >Edit</a>
 
