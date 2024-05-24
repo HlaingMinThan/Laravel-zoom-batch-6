@@ -53,13 +53,28 @@
             >Comment</button>
         </form>
         @php
-        $comments = $blog->comments()->latest()->paginate(2);
+        $comments = $blog->comments()->latest()->paginate(2);//published -> true
         @endphp
         <div>
             @foreach ($comments as $comment)
             <div class="shadow-md border border-2 p-3 w-full my-3">
                 <div>
                     <span class="text-2xl font-bold">{{$comment->author->name}}</span>
+                    @if (auth()->user()->can('delete',$comment))
+                    <form
+                        action="/comments/{{$comment->id}}/destroy"
+                        method="POST"
+                    >
+                        @method('DELETE')
+                        @csrf
+                        <button
+                            type="submit"
+                            class="bg-red-500 text-white px-2 py-1 rounded-md"
+                        >
+                            delete
+                        </button>
+                    </form>
+                    @endif
                     <span class="text-sm text-gray-500">
                         {{$comment->created_at->diffForHumans()}}</span>
                 </div>

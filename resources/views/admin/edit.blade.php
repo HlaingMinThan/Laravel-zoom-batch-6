@@ -6,6 +6,7 @@
         method="POST"
     >
         @csrf
+        @method('PUT')
         <div>
             <label
                 for="photo"

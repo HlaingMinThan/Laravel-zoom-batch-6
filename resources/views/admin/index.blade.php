@@ -36,7 +36,12 @@
                         class="text-blue-400 hover:text-blue-600 underline"
                     >Edit</a>
 
-                    <form action="/admin/blogs/{{$blog->id}}/delete">
+                    <form
+                        action="/admin/blogs/{{$blog->id}}/delete"
+                        method="POST"
+                    >
+                        @csrf
+                        @method('DELETE')
                         <button
                             type="submit"
                             class="text-white bg-red-500 rounded-lg px-2 py-1"
